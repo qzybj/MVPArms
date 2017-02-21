@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion "25.0.2"
 
     defaultConfig {
@@ -20,7 +20,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'io.reactivex:rxjava:1.2.6'
+    testCompile rootProject.ext.dependencies["junit"]
+    compile (rootProject.ext.dependencies["appcompat-v7"]){
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+    }
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["annotations"]
+
 }
